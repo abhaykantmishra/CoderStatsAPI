@@ -2,6 +2,11 @@ import express from "express"
 import cors from "cors"
 import {apiRouter} from "./src/routes.js";
 
+import { leetcodeData } from "./leetcode.js";
+import { codeforcesData } from "./codeforces.js";
+import { codechefData } from "./codechef.js";
+import { gfgData } from "./gfg.js";
+
 const app = express();
 
 const PORT = 8000;
@@ -25,3 +30,8 @@ app.get('/', (req,res) => {
         forCodeforces:"/api/codeforces/{username}"
     })
 })
+
+app.get('/codechef/:username' , codechefData)
+app.get('/codeforces/:username' , codeforcesData)
+app.get('/leetcode/:username',leetcodeData)
+app.get('/gfg/:username' , gfgData)
