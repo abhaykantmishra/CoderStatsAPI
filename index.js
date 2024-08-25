@@ -2,10 +2,10 @@ import express from "express"
 import cors from "cors"
 import {apiRouter} from "./src/routes.js";
 
-import { leetcodeData } from "./leetcode.js";
-import { codeforcesData } from "./codeforces.js";
-import { codechefData } from "./codechef.js";
-import { gfgData } from "./gfg.js";
+import { leetcodeData } from "./src/leetcode.js";
+import { codeforcesData } from "./src/codeforces.js";
+import { codechefData } from "./src/codechef.js";
+import { gfgData } from "./src/gfg.js";
 
 const app = express();
 
