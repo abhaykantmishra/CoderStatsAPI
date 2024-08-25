@@ -157,7 +157,15 @@ async function fetchUserProblemsSolved(username) {
   
       if (result.data && result.data.matchedUser && result.data.matchedUser.tagProblemCounts) {
         const skillStats = result.data.matchedUser.tagProblemCounts;
-        return skillStats;
+        const allProblems = [
+            ...skillStats.advanced,
+            ...skillStats.intermediate,
+            ...skillStats.fundamental,
+          ];
+        
+          // Sort the flattened array by the problemsSolved count in descending order
+          const sortedProblems = allProblems.sort((a, b) => b.problemsSolved - a.problemsSolved);
+         return sortedProblems;
       } else {
         throw new Error('Unexpected response structure');
       }

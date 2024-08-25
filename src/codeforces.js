@@ -67,8 +67,8 @@ async function getUserContestHistory(username) {
     try {
         // Fetch user ratings (this includes contest history)
         const userRatingResponse = await axios.get(`https://codeforces.com/api/user.rating?handle=${username}`);
+        // console.log(userRatingResponse);
         const contestHistory = userRatingResponse.data.result;
-
         // Extract relevant contest details
         const contests = contestHistory.map(contest => ({
             contestId: contest.contestId,
@@ -76,13 +76,15 @@ async function getUserContestHistory(username) {
             rank: contest.rank,
             ratingChange: contest.newRating - contest.oldRating,
             oldRating: contest.oldRating,
-            newRating: contest.newRating,
+            rating: contest.newRating,
             date: new Date(contest.ratingUpdateTimeSeconds * 1000).toISOString().split('T')[0],  // Convert timestamp to date
         }));
 
         // console.log(contests);
         return contests;
     } catch (error) {
-        console.error('Error fetching contest history from Codeforces API:', error);
+        console.error('Error fetching contest history from Codeforces API:');
     }
 }
+
+getUserContestHistory("abhaykantmishra0")
