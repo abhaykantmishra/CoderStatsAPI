@@ -31,7 +31,7 @@ app.get('/', (req,res) => {
     })
 })
 
-app.get('/codechef/:username' , codechefData)
-app.get('/codeforces/:username' , codeforcesData)
-app.get('/leetcode/:username',leetcodeData)
-app.get('/gfg/:username' , gfgData)
+// app.get('/codechef/:username' , codechefData)
+// app.get('/codeforces/:username' , codeforcesData)
+// app.get('/leetcode/:username',leetcodeData)
+// app.get('/gfg/:username' , gfgData)
