@@ -1,11 +1,8 @@
+import "dotenv/config"
 import express from "express"
 import cors from "cors"
 import {apiRouter} from "./src/routes.js";
 
-import { leetcodeData } from "./src/leetcode.js";
-import { codeforcesData } from "./src/codeforces.js";
-import { codechefData } from "./src/codechef.js";
-import { gfgData } from "./src/gfg.js";
 
 const app = express();
 
@@ -15,6 +12,8 @@ const PORT = 8000;
 app.listen(PORT , ()=>{
     console.log(`Server running on : http://localhost:${PORT}`)
 })
+
+app.use(express.urlencoded({extended:true}))
 
 app.use(cors({
     origin: 'http://localhost:5173',
