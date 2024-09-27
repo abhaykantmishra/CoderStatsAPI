@@ -26,7 +26,8 @@ app.get('/', (req,res) => {
     return res.json({
         msg:"Welcome to homepage of code-api",
         forLeetcode:"/api/leetcode/{username}",
-        forCodeforces:"/api/codeforces/{username}"
+        forCodeforces:"/api/codeforces/{username}",
+        forLeetcode : "/api/leetcode/{username}",
     })
 })
 
