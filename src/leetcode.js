@@ -18,6 +18,10 @@ export async function leetcodeData(req,res){
     .then((res) => {return res;})
     .catch((err) => {return err;})
 
+    const contestHistory = await getLeetCodeContestHistory(username)
+    .then((res)=> {return res})
+    .catch((err) => {return err;})
+
     return res.json({
         msg:"welcome to leetcode page",
         username:username,
@@ -25,6 +29,7 @@ export async function leetcodeData(req,res){
         rank:rank,
         topicwiseData:topicwiseData,
         userCalender:userCalender,
+        contestHistory:contestHistory,
     })
 }
 
@@ -229,3 +234,44 @@ async function fetchUserProblemsSolved(username) {
     }
   }
   
+  async function getLeetCodeContestHistory(username) {
+    const url = "https://leetcode.com/graphql";
+
+    const query = `
+    query getUserContestHistory($username: String!) {
+        userContestHistory(username: $username) {
+            contests {
+                title
+                startTime
+                endTime
+                rank
+                score
+                problems {
+                    title
+                    status
+                }
+            }
+        }
+    }
+    `;
+
+    const variables = {
+        username: username
+    };
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ query, variables })
+    });
+
+    if (!response.ok) {
+        throw new Error(`Query failed with status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(data);
+    return data;
+}

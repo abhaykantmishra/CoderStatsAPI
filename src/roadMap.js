@@ -5,9 +5,8 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",
-    systemInstruction: "You are a roadmap generator for webdevelopment and dsa for students. ",
-    systemInstruction:"your response will be a single json object cotaining each topicname and days to comeplete it.the schema should be like: {topicname:name of topic, daystoComplete:no of days to complete the topic}"
-  });
+    systemInstruction:"" ,
+    });
 
 // const prompt = "Write a story about a magic backpack in 50words.";
 
@@ -25,8 +24,8 @@ async function generateRoadMap(req,res){
         }
         const geminiResult = await model.generateContent(prompt);
         const result = geminiResult.response.text()
-        console.log(result.substring(8));
-        const ans = result.substring(8)
+        // console.log(result.substring(8));
+        const ans = result;
         // const ans = await JSON.parse(result);
         // console.log(ans);
         // const ans = JSON.parse(result);
