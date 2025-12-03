@@ -1,22 +1,36 @@
 {
-  "name": "api",
+  "name": "codesync-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "CodeSync API - Competitive Programming Learning Platform",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node index.js"
+    "dev": "node --watch index.js",
+    "start": "node index.js",
+    "seed:db": "node scripts/seed.js seed",
+    "seed:clean": "node scripts/seed.js clean"
   },
+  "keywords": [
+    "competitive-programming",
+    "learning",
+    "platform",
+    "api"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@google/generative-ai": "^0.17.1",
     "axios": "^1.7.4",
+    "bcryptjs": "^2.4.3",
     "cheerio": "^1.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "mongoose": "^9.0.0",
     "nodemailer": "^6.9.16"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
   }
 }
