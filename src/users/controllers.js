@@ -1,3 +1,4 @@
+import { generateToken } from "../utils/jwt.js";
 import User from "./model.js";
 
 // Create a new user (Signup)
@@ -48,6 +49,12 @@ async function createUser(req, res) {
 
     await newUser.save();
 
+    // Generate JWT token for new user
+    const accessToken = generateToken({
+      _id: newUser._id,
+      email: newUser.email,
+    });
+
     // Return user without password
     const userResponse = newUser.toJSON();
 
@@ -55,6 +62,7 @@ async function createUser(req, res) {
       success: true,
       message: "User created successfully",
       user: userResponse,
+      token: accessToken,
     });
   } catch (error) {
     console.error("CREATE USER ERROR:", error);
@@ -131,6 +139,12 @@ async function loginUser(req, res) {
     // Update last login
     await user.updateLastLogin();
 
+    // generate jwt token 
+    const accessToken = generateToken({
+        _id: user._id,
+        email: user.email
+    })
+
     // Return user without password
     const userResponse = user.toJSON();
 
@@ -138,6 +152,7 @@ async function loginUser(req, res) {
       success: true,
       message: "Login successful",
       user: userResponse,
+      token: accessToken, 
     });
   } catch (error) {
     console.error("LOGIN ERROR:", error);

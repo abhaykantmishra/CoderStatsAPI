@@ -40,7 +40,7 @@ import userRouter from "./src/users/routes.js";
 
 app.use('/api/users', userRouter);
 ```
-✅ Already integrated in `/src/routes.js`
+Already integrated in `/src/routes.js`
 
 ### Step 2: Ensure Database Connection
 Make sure MongoDB is connected before starting the server.

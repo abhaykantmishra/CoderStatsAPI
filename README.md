@@ -326,7 +326,7 @@ See "Usage Examples" section above.
 
 ---
 
-## 🔄 Middleware Stack
+## Middleware Stack
 
 1. **Body Parser** - Parse JSON/URL-encoded bodies
 2. **CORS** - Cross-origin resource sharing
@@ -336,7 +336,7 @@ See "Usage Examples" section above.
 
 ---
 
-## 📊 Response Format
+## Response Format
 
 ### Success
 
@@ -418,7 +418,7 @@ ISC
 ---
 
 
-## 📦 Key Dependencies
+## Key Dependencies
 
 - **express** - Web framework
 - **mongoose** - MongoDB ODM
