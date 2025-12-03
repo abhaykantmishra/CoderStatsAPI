@@ -46,9 +46,13 @@ const userSchema = new Schema(
     },
 
     // User details
+    college: {
+      type: String,
+      default: null,
+    },
     graduation_year: {
       type: Number,
-      min: [2020, "Invalid graduation year"],
+      min: [2000, "Invalid graduation year"],
       max: [2100, "Invalid graduation year"],
       default: null,
     },
