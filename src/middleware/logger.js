@@ -44,9 +44,9 @@ export const logger = (req, res, next) => {
     const duration = Date.now() - start;
     const statusColor = getStatusColor(res.statusCode);
     const methodColor = getMethodColor(req.method);
-
+    // console.log(req)
     console.log(
-      `${methodColor}${req.method}\x1b[0m ${req.path} ${statusColor}${res.statusCode}\x1b[0m ${duration}ms`
+      `${methodColor}${req.method}\x1b[0m ${req.originalUrl} ${statusColor}${res.statusCode}\x1b[0m ${duration}ms`
     );
 
     // Call the original json function
