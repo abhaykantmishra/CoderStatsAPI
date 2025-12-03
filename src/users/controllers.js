@@ -227,17 +227,26 @@ async function updateUser(req, res) {
     const restrictedFields = ["password", "email", "_id", "createdAt"];
     const updateKeys = Object.keys(updates);
 
-    // Check if any restricted field is being updated
-    const hasRestrictedField = updateKeys.some((field) =>
-      restrictedFields.includes(field)
-    );
+    // remove restricted fields and prepare sanitized updates
+    const sanitizedUpdates = updateKeys.reduce((obj, key) => {
+      if (!restrictedFields.includes(key)) {
+        obj[key] = updates[key];
+      }
+      return obj;
+    }, {});
 
-    if (hasRestrictedField) {
-      return res.status(400).json({
-        success: false,
-        message: "Cannot update restricted fields (email, password, id)",
-      });
-    }
+    // Check if any restricted field is being updated
+    // const hasRestrictedField = sanitizedUpdates?.some((field) =>
+    //   restrictedFields.includes(field)
+    // );
+
+    // if (hasRestrictedField) {
+    //   const attempted = sanitizedUpdates.filter((f) => restrictedFields.includes(f));
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: `Cannot update restricted fields: ${attempted.join(", ")}`,
+    //   });
+    // }
 
     // Validate bio length if provided
     if (updates.bio && updates.bio.length > 500) {
@@ -258,7 +267,7 @@ async function updateUser(req, res) {
       }
     }
 
-    const user = await User.findByIdAndUpdate(userId, updates, {
+    const user = await User.findByIdAndUpdate(userId, sanitizedUpdates, {
       new: true,
       runValidators: true,
     });
